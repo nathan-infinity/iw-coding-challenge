@@ -33,11 +33,24 @@ namespace CodingChallengeHost
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            });
+            services
+                .AddAuthentication(options =>
+                {
+                    
+                })
+                //.AddJwtBearer(options =>
+                //{
+                    
+                //})
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                    //googleOptions.Events.OnRedirectToAuthorizationEndpoint = async context =>
+                    //{
+                    //    context.
+                    //};
+                });
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
